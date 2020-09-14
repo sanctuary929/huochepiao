@@ -55,6 +55,7 @@ void buy::on_confirm_clicked()
     j++;
     }
     j=a1;
+    cost=0;
     while (j<a2)
     {
         cost=cost+distance[j];

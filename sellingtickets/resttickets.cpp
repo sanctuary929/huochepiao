@@ -105,6 +105,7 @@ void resttickets::on_search_clicked()
         i++;
     }
     i=a3;
+    cost1=0;
     while (i<a4)
     {
         cost1=cost1+distance[i];
