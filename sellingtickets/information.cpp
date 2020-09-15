@@ -23,6 +23,7 @@ information::information(QWidget *parent) :
     ui->ID2_->hide();
     ui->name2_->hide();
     ui->price_->hide();
+    //设置返回
     connect(ui->back,&QPushButton::clicked,this,&information::sendSlot_3);
 }
 

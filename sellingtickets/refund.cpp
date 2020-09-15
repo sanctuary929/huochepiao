@@ -55,17 +55,20 @@ void refund::on_confirm_clicked()
             QTextStream stream2 (&file2);
             stream2.setCodec("UTF-8");
             stream2>>startstr>>endstr>>idstr>>namestr;
-            file2.close();
-        }
+
+
         if (idstr==idstr1)
         {
             flag=1;
             filename1=filename[0];
             break;
         }
+        file2.close();
+        }
     }
     if (flag==1)
     {
+
     QFile file3;
     file3.remove(filename1);
     QMessageBox::about(this,"退票","已成功退票");
@@ -85,8 +88,9 @@ void refund::on_confirm_clicked()
        }
     }
     QFile file5;
-    if (flag1==0) file5.remove("../data");
+    if (flag1==0) file5.remove("../wenjianming");
     flag1=0;
+    flag=0;
     ui->ID_->setText("");
     ui->name_->setText("");
 }

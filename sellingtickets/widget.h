@@ -19,6 +19,7 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
+
     void deal1();
     void deal2();
     void deal3();

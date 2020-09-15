@@ -18,6 +18,7 @@ resttickets::resttickets(QWidget *parent) :
     ui->rest->hide();
     ui->rest_->hide();
     ui->price->hide();
+    //设置返回
     connect(ui->back,&QPushButton::clicked,this,&resttickets::sendSlot_2);
 }
 
@@ -28,6 +29,10 @@ resttickets::~resttickets()
 
 void resttickets::on_search_clicked()
 {
+    for (int k=0;k<10;k++)
+    {
+        seat[k]=10;
+    }
     filename[0]="../passenger-information";
     QFile file1;
     file1.setFileName("../wenjianming");
@@ -39,7 +44,7 @@ void resttickets::on_search_clicked()
         stream1>>filename[1];
         file1.close();
     }
-    if    (filename[1]!="")
+    if    (filename[1]!=NULL)
     {
     while (filename[0]!=filename[1])
     {
@@ -52,8 +57,7 @@ void resttickets::on_search_clicked()
             QTextStream stream2 (&file2);
             stream2.setCodec("UTF-8");
             stream2>>stratstr>>endstr;
-            file2.close();
-        }
+
         i=0;
         while (i<10)
         {
@@ -62,12 +66,15 @@ void resttickets::on_search_clicked()
             i++;
         }
         i=a1;
-        while (i<=a2)
+        while (i<a2)
         {
+            if(seat[i]>0)
             seat[i]=seat[i]-1;
             i++;
         }
         i=0;
+        file2.close();
+    }
     }
     }
     stratstr1=ui->start_->text();
@@ -99,10 +106,20 @@ void resttickets::on_search_clicked()
     }
     min1=seat[a3];
     i=a3;
-    while (i<=a4)
+    while (i<a4)
     {
         if (seat[i]<=min1) min1=seat[i];
         i++;
+    }
+    QFile file3;
+    file3.setFileName("../yupiao");
+    bool isok3 = file3.open(QIODevice::WriteOnly);
+    if (true==isok3)
+    {
+        QTextStream stream3 (&file3);
+        stream3.setCodec("UTF-8");
+        stream3<<min1;
+        file3.close();
     }
     i=a3;
     cost1=0;
@@ -123,10 +140,7 @@ void resttickets::on_search_clicked()
 }
     flag1=0;
     flag2=0;
-    for (int i=0;i<10;i++)
-    {
-        seat[i]=10;
-    }
+
 }
 
 void resttickets::sendSlot_2()
